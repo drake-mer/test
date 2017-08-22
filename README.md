@@ -32,7 +32,7 @@ http://localhost:8080/{int1}/{int2}/{limit}/{string1}/{string2}
 Deviating parameters will result in a 404 error.
 
 The API support only the GET HTTP verb. Any other verb will result
-in a 404 error.
+in a 405 error, "Method not allowed"
 
 A simple set of automated tests may be run using pytest. 
 They illustrate very well the behaviour of the API.

@@ -25,7 +25,7 @@ type fizzbuzz interface {
     Generator() []string  // generates the FizzBuzz list
     Validator() bool  // Validate that the FizzBuzz is contained in a given set of parameters
     Serializer(httprouter.Params)  // transform URI parameters into a FizzBuzz
-    Stringify(int)  // convert an integer value according to the FizzBuzz parameters
+    Stringify(int)  // convert an integer value according to the FizzBuzz parameter
 }
 
 
@@ -63,8 +63,8 @@ func (fizzBuzz FizzBuzz) Validator() (ok bool, msg string) {
     }
 
     // check the string length
-    ok = ( len(fizzBuzz.buzz) < 50 || len(fizzBuzz.fizz) < 50 ||
-           len(fizzBuzz.buzz) == 0 || len(fizzBuzz.fizz) == 0 )
+    ok = ( len(fizzBuzz.buzz) < 50 && len(fizzBuzz.fizz) < 50 &&
+           len(fizzBuzz.buzz) > 0 && len(fizzBuzz.fizz) > 0 )
     if !ok {
         msg = "One of the input word is larger than 50 bytes or empty string"
         return
@@ -134,10 +134,14 @@ func FizzBuzzAnswer(w http.ResponseWriter, r *http.Request, ps httprouter.Params
     myFizzBuzz.Serializer(ps)
     ok, err_msg := myFizzBuzz.Validator()
     if !ok {
-        fmt.Println("incorrect parameters: "+err_msg)
-        return
+        http.Error(w, "incorrect parameters: "+err_msg, 404)
+    }else {
+        w.Header().Set("Content-Type", "application/json")
+        data, err := json.Marshal(myFizzBuzz.Generator())
+        if err==nil {
+            w.Write(data)
+        } 
     }
-    fmt.Println("result:\n" + fmt.Sprint(myFizzBuzz.Generator()))
 }
 
 func main() {
