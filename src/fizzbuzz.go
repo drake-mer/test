@@ -5,8 +5,13 @@ import (
     "strconv"
     "github.com/julienschmidt/httprouter"
     "net/http"
+    "encoding/json"
     "log"
 )
+
+type FizzBuzzAns struct{
+    FizzBuzzJSON []string `json:"FizzBuzz"`
+}
 
 type FizzBuzz struct {
     fizz string
