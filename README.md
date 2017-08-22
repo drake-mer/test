@@ -37,38 +37,26 @@ in a 405 error, "Method not allowed"
 A simple set of automated tests may be run using pytest. 
 They illustrate very well the behaviour of the API.
 
-To execute them, you will need
-* a working docker installation
-* a working python3 environment
+To execute them, you will need to have the curl executable installed 
+on your machine.
 
-## How To Test (v1)
-
-A set of automated tests are written with `pytest`
-and the `requests` library.
-
-Before moving forward, please ensure that all the dependancies
-to this project are met. Please run
-
-    pip install --user pytest pytest-docker requests
-
-and make sure that all the installed lib are correctly set up in your path.
-
-Then you can do, from the root folder of the application :
-
-    pytest
-
-It will launch the pytest session and it will report accordingly.
-
-## How To Test (v2)
+## How To Test 
 
 A simple shell script using curl can be set up to 
 launch the web server as a process and to retrieve results
 from it.
 
-Simply run, from the tests/ folder:
+Simply run, from the root folder of this repository:
 
+    cd tests/
+    go run ../src/fizzbuzz.hs
     ./curl_tests.sh
 
 It will launch the webserver and execute a series of test
 on it.
 
+You can also visit the API with your webserver at http://localhost:8080/
+and follow the instructions there.
+
+This [link](http://localhost:8080/1/2/3/a/b) should display the list ["a", "ab"]
+if everything is in order.

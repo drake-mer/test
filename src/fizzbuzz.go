@@ -9,10 +9,6 @@ import (
     "log"
 )
 
-type FizzBuzzAns struct{
-    FizzBuzzJSON []string `json:"FizzBuzz"`
-}
-
 type FizzBuzz struct {
     fizz string
     buzz string
@@ -127,6 +123,7 @@ func (parameters FizzBuzz) Stringify(input int) (string) {
 
 func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
     fmt.Fprint(w, "Welcome to your FizzBuzz Generator!\n")
+    fmt.Fprint(w, "URI format is : http://localhost:8080/int1/int2/limit/string1/string2\n")
 }
 
 func FizzBuzzAnswer(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
