@@ -1,0 +1,27 @@
+<h1 id="exercise-write-a-simple-fizz-buzz-rest-server.">Exercise: Write a simple fizz-buzz REST server.</h1>
+<p>The original fizz-buzz consists in writing all numbers from 1 to 100, and just replacing all multiples of 3 by “fizz”, all multiples of 5 by “buzz”, and all multiples of 15 by “fizzbuzz”.</p>
+<p>The output would look like this:</p>
+<pre><code>1,2,fizz,4,buzz,fizz,7,8,fizz,buzz,11,fizz,13,14,fizzbuzz,fizz,...</code></pre>
+<p>More specifically :</p>
+<p>• Expose a REST API endpoint that accepts five parameters : two strings (say, string1 and string2), and three integers (say, int1, int2 and limit), and returns a JSON • It must return a list of strings with numbers from 1 to limit, where: • all multiples of int1 are replaced by string1, • all multiples of int2 are replaced by string2, • all multiples of int1 and int2 are replaced by string1string2</p>
+<h1 id="answer">Answer</h1>
+<p>A simple REST API is provided that returns the FizzBuzz data as JSON.</p>
+<p>The input parameters are expressed in the URI as follow:</p>
+<p>http://localhost:8080/{int1}/{int2}/{limit}/{string1}/{string2}</p>
+<ul>
+<li>int1, int2 and limit are only allowed in the range [1,10000]</li>
+<li>string1 and string2 must not be larger than 50 bytes</li>
+</ul>
+<p>Deviating parameters will result in a 404 error.</p>
+<p>The API support only the GET HTTP verb. Any other verb will result in a 405 error, &quot;Method not allowed&quot;</p>
+<p>A simple set of automated tests may be run using pytest. They illustrate very well the behaviour of the API.</p>
+<p>To execute them, you will need to have the curl executable installed on your machine.</p>
+<h2 id="how-to-test">How To Test</h2>
+<p>A simple shell script using curl can be set up to launch the web server as a process and to retrieve results from it.</p>
+<p>Simply run, from the root folder of this repository:</p>
+<pre><code>cd tests/
+go run ../src/fizzbuzz.hs
+./curl_tests.sh</code></pre>
+<p>It will launch the webserver and execute a series of test on it.</p>
+<p>You can also visit the API with your webserver at http://localhost:8080/ and follow the instructions there.</p>
+<p>This <a href="http://localhost:8080/1/2/3/a/b">link</a> should display the list [&quot;a&quot;, &quot;ab&quot;] if everything is in order.</p>
